@@ -1,0 +1,50 @@
+\documentclass[border=10pt]{standalone}
+\usepackage[siunitx]{circuitikz}
+\usepackage{ctikzset}
+
+\begin{document}
+
+\begin{circuitikz}[scale=1.2]
+    % 电源
+    \draw (0,0) to[battery, l=$V$, invert] (0,-2);
+    
+    % 开关S
+    \draw (0,-2) to[switch, l=S] (2,-2);
+    
+    % 分支点
+    \draw (2,-2) -- (2,-1.5);
+    \draw (2,-1.5) -- (2,-0.5);
+    
+    % 第一个支路：开关S1 -> 电动机M
+    \draw (2,-0.5) to[switch, l=$S_1$] (4,-0.5);
+    \draw (4,-0.5) to[motor, l=M] (6,-0.5);
+    
+    % 第二个支路：灯泡 -> 开关S2
+    \draw (2,-1.5) to[lamp, l=灯泡] (4,-1.5);
+    \draw (4,-1.5) to[switch, l=$S_2$] (6,-1.5);
+    
+    % 汇合点
+    \draw (6,-0.5) -- (6,-1.5);
+    \draw (6,-1.5) -- (6,-2);
+    
+    % 回到电源负极
+    \draw (6,-2) -- (0,-2);
+    
+    % 电流方向箭头
+    \draw[->, thick, blue] (0.5,-1) -- (1.5,-1);
+    \draw[->, thick, blue] (2.5,-0.3) -- (3.5,-0.3);
+    \draw[->, thick, blue] (4.5,-0.3) -- (5.5,-0.3);
+    \draw[->, thick, blue] (2.5,-1.7) -- (3.5,-1.7);
+    \draw[->, thick, blue] (4.5,-1.7) -- (5.5,-1.7);
+    \draw[->, thick, blue] (6.5,-1.5) -- (6.5,-2);
+    \draw[->, thick, blue] (5.5,-2) -- (0.5,-2);
+    
+    % 节点标记
+    \node[above] at (0,0) {正极};
+    \node[below] at (0,-2) {负极};
+    \node[above] at (4,-0.2) {支路1};
+    \node[below] at (4,-1.8) {支路2};
+    
+\end{circuitikz}
+
+\end{document}
